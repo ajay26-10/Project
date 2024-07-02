@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-cyan-100 to-green-100">
+    <header class="bg-green-500 h-[60px] text-xl rounded-full shadow-xl flex">
+        <input type="image" src="/home/ajay/KBA/Project/images/fad.png" style="height: 60px; width:60px;">
+        <nav class="m-2 pl-2">
+            <input type="search" placeholder="Search" class="border-2 border-solid pl-2 rounded-md">
+            <button class="border-2 rounded-md p-1 hover:bg-green-300">Search</button>
+            <a href="" class="ml-[750px] pl-2">About</a>
+            <a href="/signup" class="pl-2">Logout</a>
+        </nav>
+    </header>
+    
+    <div>
+        <form action="/new-project" method="post" id="newproject" enctype="multipart/form-data">
+            <div class="mt-6">
+                <input type="text" name="title" placeholder="Title" class="h-[40px] w-[500px] items-center" required>
+                <input type="text" name="tagline" placeholder="Tag Line" class="h-[35px] w-[750px]" required>
+            </div>  
+            <div class="mx-auto w-[750px] mt-4">
+                <textarea name="description" placeholder="Description" class="w-full h-[200px] border-2 border-solid rounded-md p-2" required></textarea>
+                <input type="number" name="targetAmount" placeholder="Target Amount" class="h-[35px] w-[750px] mt-4" required>
+            </div>
+            <div class="mx-auto w-[750px] mt-4">
+                <img src="/home/ajay/KBA/Project/public/images/blankbg.png" alt="Image" class="w-[650px]">
+                <input type="file" name="image" accept="image/jpeg, image/png, image/jpg" placeholder="Insert image here" class="h-[200px] w-[650px]" required>
+            </div>
+            <div class="w-[100px] mx-auto">
+                <button type="submit" class="w-[100px] border-2 bg-green-300 p-2 rounded-lg mt-[30px] hover:bg-green-500">Submit</button>
+            </div>
+        </form>
+    </div>
+    
+    <footer class="bg-green-500 h-[30px] flex content-center">
+        Fund A Dream &copy;2024 All Rights Reserved 
+        <nav class="ml-[750px]">
+            <a href="" class="pl-2">Terms</a>  
+            <a href="" class="pl-2">Privacy Policy</a>
+            <a href="" class="pl-2">Cookie Preferences</a>
+        </nav>
+    </footer>
+
+
+    <script>
+        document.getElementById('newproject').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    try {
+        const response = await fetch('/new-project', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            alert('Project submitted successfully!');
+        } else {
+            alert('Project submission failed. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error during project submission:', error);
+        alert('An error occurred during project submission. Please try again.');
+    }
+});
+
+    </script>
+</body>
+</html>

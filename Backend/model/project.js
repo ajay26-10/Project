@@ -1,4 +1,5 @@
 const { Schema} =require('mongoose');
+const { mongoose} = require ('mongoose')
 const { model} =require('mongoose');
 const projectSchema = new Schema({
     title: { type: String, required: true },
@@ -6,8 +7,7 @@ const projectSchema = new Schema({
     description: { type: String, required: true },
     targetAmount: { type: Number, required: true },
     pledgedAmount: { type: Number, default: 0 },
-    image: { type: String },
-    createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
+    createdBy: { type: String, required: true },
 });
 
 const Project = model('projecdetails', projectSchema)

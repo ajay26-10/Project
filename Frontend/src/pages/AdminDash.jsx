@@ -35,7 +35,7 @@ const AdminDash = () => {
           <Link to='/admindash'>Admin Dashboard</Link>
         </div>
         <div className="border-b-2 p-2">
-          <Link to="/admin/all-users">View Users</Link>
+          <Link to="/admin/allusers">View Users</Link>
         </div>
         <div className="border-b-2 p-2">
           <Logout />

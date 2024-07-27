@@ -3,9 +3,9 @@ const  { mongoose } = require ('mongoose')
 const app = express();
 const cors = require ('cors')
 const routes = require('./routes/routes')
-const admin = require('./routes/adminroutes')
+const adminRoute = require('./routes/adminroutes')
 const authRoute = require('./routes/auth')
-const adminRoutes = require('./routes/adminauth')
+const adminAuthRoutes = require('./routes/adminauth')
 const cookieParser = require('cookie-parser')
 const path = require('path');
 const dotenv = require('dotenv');
@@ -15,8 +15,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/',routes);
 app.use('/', authRoute);
-app.use('/', adminRoutes);
-app.use('/',admin)
+app.use('/', adminAuthRoutes);
+app.use('/',adminRoute)
 const uri= process.env.mongodb_uri;
 mongoose.connect(
     uri

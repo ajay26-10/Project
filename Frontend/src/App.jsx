@@ -43,7 +43,7 @@ function App() {
         <Route path='/adminlogin' element= {<AdminLogin/>}/>
         <Route path='/admindash' element= {<AdminDash/>}/>
         <Route path='/admin/allusers' element={<AdminAllUsers/>}/>
-        <Route path='/admin/review' element={<AdminReview/>}/>
+        <Route path='/admin/review/:userId' element={<AdminReview/>}/>
 
         </Route>
       </>

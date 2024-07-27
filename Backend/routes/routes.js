@@ -116,7 +116,21 @@ router.post('/donate', verifyToken, async (req, res) => {
 
 });
 
-
+router.put('/projects/:projectId', async (req, res) => {
+  try {
+    const { projectId } = req.params;
+    const { title, tagline, targetAmount, pledgedAmount } = req.body;
+    const updatedProject = await Project.findByIdAndUpdate(
+      projectId,
+      { title, tagline, targetAmount, pledgedAmount },
+      { new: true }
+    );
+    res.status(200).json(updatedProject);
+  } catch (error) {
+    console.error('Error updating project:', error);
+    res.status(500).json({ error: 'Failed to update project' });
+  }
+});
 
 
 

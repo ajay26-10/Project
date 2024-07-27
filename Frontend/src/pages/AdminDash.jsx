@@ -8,11 +8,12 @@ const AdminDash = () => {
   useEffect(() => {
     const fetchTotalUsers = async () => {
       try {
-        const response = await fetch('/api/admin/totalusers',{
+        const response = await fetch('api/totalusers',{
           headers: {
             'Content-Type' : 'application/json'
           }
       });
+      console.log(response)
 
         if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.statusText}`);

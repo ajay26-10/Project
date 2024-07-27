@@ -3,6 +3,7 @@ const  { mongoose } = require ('mongoose')
 const app = express();
 const cors = require ('cors')
 const routes = require('./routes/routes')
+const admin = require('./routes/adminroutes')
 const authRoute = require('./routes/auth')
 const adminRoutes = require('./routes/adminauth')
 const cookieParser = require('cookie-parser')
@@ -12,6 +13,10 @@ dotenv.config();
 const PORT= 5000;
 app.use(express.json());
 app.use(cookieParser());
+app.use('/',routes);
+app.use('/', authRoute);
+app.use('/', adminRoutes);
+app.use('/',admin)
 const uri= process.env.mongodb_uri;
 mongoose.connect(
     uri
@@ -25,9 +30,7 @@ database.once("connected", () => {
     console.log("Database Connected");
 });
 
-app.use('/',routes);
-app.use('/', authRoute);
-app.use('/api/admin', adminRoutes);
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 

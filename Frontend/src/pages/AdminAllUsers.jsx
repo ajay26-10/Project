@@ -7,7 +7,7 @@ const AdminAllUsers = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('/api/admin/all-users');
+        const response = await fetch('/api/allusers');
         if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.statusText}`);
         }

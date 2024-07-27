@@ -9,7 +9,7 @@ const AdminSignup = () => {
   const navigate = useNavigate();
 
   const signupSubmit = async (adminDetails) => {
-    const res = await fetch("/api/adminsignup", {
+    const res = await fetch("api/adminsignup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

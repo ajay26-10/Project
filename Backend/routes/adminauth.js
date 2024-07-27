@@ -6,18 +6,18 @@ const jwt = require('jsonwebtoken');
 
 
 router.post('/adminsignup', async (req,res) => {
-    try{
-        const userDet= req.body;
-        const email = userDet.email;
-        const password = userDet.password;        
-        const hashpassword = await bcrypt.hash(password,5)
-        const admin = new Admin({password:hashpassword, email});
-        await admin.save();
-        res.status(201).json({ message: "User saved Successfully"});
-    }catch(error){
-        console.log("Error",error)
-        res.status(500).json({ message:' Registration Failed'})
-    }
+  try{
+      const userDet= req.body;
+      const email = userDet.email;
+      const password = userDet.password;
+      const hashpassword = await bcrypt.hash(password,5)
+      const user = new Admin({email,password:hashpassword});
+      await user.save();
+      res.status(201).json({ message: "Admin Added Successfully"});
+  }catch(error){
+      console.log("Error",error)
+      res.status(500).json({ message:' Registration Failed'})
+  }
 });
 
 router.post('/adminlogin', async(req,res) =>{

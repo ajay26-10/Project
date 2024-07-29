@@ -10,5 +10,5 @@ const projectSchema = new Schema({
     createdBy: { type: String, required: true },
 });
 
-const Project = model('projecdetails', projectSchema)
+const Project = model('Project_Details', projectSchema)
 module.exports = Project;

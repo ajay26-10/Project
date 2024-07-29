@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const UserDetails = require('../model/user');
-const Project = require('../model/project')
+const Project = require('../model/project');
+const verifyAdmin = require('../middleware/adminmw');
 
 // Get total number of users
-router.get('/totalusers', async (req, res) => {
+router.get('/totalusers',verifyAdmin, async (req, res) => {
   try {
     const userCount = await UserDetails.countDocuments();
     console.log(userCount);
@@ -16,7 +17,7 @@ router.get('/totalusers', async (req, res) => {
 });
 
 //To Sort all Projects by Users
-router.get('/allusers', async (req, res) => {
+router.get('/allusers',verifyAdmin, async (req, res) => {
   try {
     const projectsByUser = await Project.aggregate([
       {
@@ -42,7 +43,7 @@ router.get('/allusers', async (req, res) => {
   }
 });
 
-router.get('/user/:userId/projects', async (req, res) => {
+router.get('/user/:userId/projects',verifyAdmin, async (req, res) => {
   try {
     const { userId } = req.params;
     const projects = await Project.find({ createdBy: userId });
@@ -53,7 +54,7 @@ router.get('/user/:userId/projects', async (req, res) => {
   }
 });
 
-router.delete('/projects/:projectId', async (req, res) => {
+router.delete('/projects/:projectId', verifyAdmin, async (req, res) => {
   try {
     const { projectId } = req.params;
     await Project.findByIdAndDelete(projectId);

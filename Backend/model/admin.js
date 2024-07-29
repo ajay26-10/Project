@@ -5,5 +5,5 @@ const demo = new Schema({
     password: { type: String, required: true},
  });
 
- const admindetails = model('AdminCredentials', demo);
+ const admindetails = model('Admin_Credentials', demo);
 module.exports=admindetails;

@@ -3,6 +3,9 @@ const router = express.Router();
 const Admin = require ('../model/admin')
 const bcrypt = require ('bcrypt')
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
+const jwt_token_admin = process.env.JWT_SECRET_ADMIN;
 
 
 router.post('/adminsignup', async (req,res) => {
@@ -35,17 +38,17 @@ router.post('/adminlogin', async(req,res) =>{
             .status(401)
             .json({ error: "Authentication failed - Password doesn't match" });
         }
-        const token = jwt.sign(
+        const admintoken = jwt.sign(
         { userId: user._id, email: user.email},
-        "your-secret-key",
+        jwt_token_admin,
         {expiresIn: "1h",}
       );
       
-      res.cookie("Authtoken", token);
+      res.cookie("Admintoken", admintoken);
       res.json({
       status: true,
       message: "login success",
-      token,
+      admintoken,
 });
 return res;
 
@@ -56,7 +59,7 @@ res.status(500).json({ error: "Login failed" });
 });
 
 router.get("/logout", (req, res) => {
-    res.clearCookie("Authtoken");
+    res.clearCookie("Admintoken");
     res.status(200).send("Logout successful");
     return res;
   });
